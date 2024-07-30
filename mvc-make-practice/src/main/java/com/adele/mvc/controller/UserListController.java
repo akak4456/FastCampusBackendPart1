@@ -1,16 +1,15 @@
 package com.adele.mvc.controller;
 
-import com.adele.mvc.annotation.Controller;
-import com.adele.mvc.annotation.RequestMapping;
+import com.adele.mvc.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
-@Controller
-public class HomeController {
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+public class UserListController implements Controller{
+    @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return "home";
+        request.setAttribute("users", UserRepository.findAll());
+        return "/user/list";
     }
 }
